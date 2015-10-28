@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head lang='en'>
+	<meta charset='UTF-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Errata Tool Mobile APP</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/project.css">
+</head>
+<body>
+	<div class="header">
+		Errata Tool
+	</div>
+	<div class="summary-container">
+		<div class="summary-title">
+			Advisories 
+		</div>
+		<div class='summary-data'>
+			456 <span>Open Advisories</span>
+		</div>
+	</div>	
+	<ul class='chart'>
+		<li class='colors newfiles'></li>
+		<li class='colors qe'></li>
+		<li class='colors relprep'></li>
+		<li class='colors pushready'></li>
+		<li>
+			<div>NEW FILES</div>
+			<div id="NEW_FILES"></div>
+		</li>
+		<li>
+			<div>QE</div>
+			<div id="QE"></div>
+		</li>
+		<li>
+			<div>REL PREP</div>
+			<div id="REL_PREP"></div>
+		</li>
+		<li>
+			<div>PUSH READY</div>
+			<div id="PUSH_READY"></div>
+		</li>
+		<div class='clear'></div>
+	</ul>
+	<div class="list-title">
+		New Advisories List
+		<span class="list-more">
+			<a href='#'><i class="fa fa-angle-double-right"></i></a>
+		</span>
+	</div>
+	<table class='list' id="adv_list">
+		
+	</table>
+	<div class='footer'>
+		<ul>
+			<li class='active'>
+				<a href="home.html">
+					<i class="fa fa-home"></i>
+					<div>Home</div>
+				</a>
+			</li>
+			<li>
+				<a href="list.html">
+					<i class="fa fa-list"></i>
+					<div>List</div>
+				</a>
+			</li>
+			<li>
+				<a href="http://www.baidu.com">
+					<i class="fa fa-bar-chart"></i>
+					<div>Chart</div>
+				</a>
+			</li>
+			<li>
+				<a href="mine.html">
+					<i class="fa fa-user"></i>
+					<div>Mine</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/errata.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</html>

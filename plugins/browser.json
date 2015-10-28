@@ -1,0 +1,38 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"browser-package\" value=\"Device\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-transport-security": {
+            "PACKAGE_NAME": "com.example.hello"
+        }
+    },
+    "dependent_plugins": {}
+}
