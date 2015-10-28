@@ -17,6 +17,7 @@ Errata.prototype.init = function(type){
 
 Errata.prototype.list = function(status,page){
 	var data = {status : status , page : page,userName : this.userName};
+	var errata = this;
 	$.ajax({
 		url : this.HOST+"list",
 		dataType : "jsonp",
@@ -29,8 +30,7 @@ Errata.prototype.list = function(status,page){
 				var adv = new AdvListItem(advisory.id,advisory.fulladvisory,advisory.synopsis,advisory.status);
 			    $('#adv_list').append(adv);
 				$('#adv_'+advisory.id).bind("click",function(){
-					//this.detail(advisory.id);
-					alert($(this).attr("id"));
+					errata.detail($(this).attr("id"));					
 				});
 			}
 			
