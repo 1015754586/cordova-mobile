@@ -1,21 +1,36 @@
 var Errata = function(){
 	this.HOST = "http://10.66.141.235:8080/dataservice/api/sys/mobile/errata/advisory/";
 	this.userName = "";
+	this.total = 0;
 	
+	$.support.cors = true;
 	this.init();
 };
 
 Errata.prototype.Errata = Errata;
 
-Errata.prototype.init = function(type){
-	$.support.cors = true;
+Errata.prototype.init = function(type){	
+	this.home();
+};
+
+Errata.prototype.home = function(type){
 	this.summary();
+	this.query();
+};
+
+Errata.prototype.list = function(type){
 	this.list();
 };
 
+Errata.prototype.my = function(type){
+	
+};
 
+Errata.prototype.chart = function(type){
+	
+};
 
-Errata.prototype.list = function(status,page){
+Errata.prototype.query = function(status,page){
 	var data = {status : status , page : page,userName : this.userName};
 	var errata = this;
 	$.ajax({
@@ -41,10 +56,6 @@ Errata.prototype.list = function(status,page){
 	});
 };
 
-Errata.prototype.total = function(type){
-	
-};
-
 Errata.prototype.summary = function(){
 	
 	$.ajax({
@@ -55,6 +66,8 @@ Errata.prototype.summary = function(){
 			$('#QE').text(data.QE);
 			$('#REL_PREP').text(data.REL_PREP);
 			$('#PUSH_READY').text(data.PUSH_READY);
+			this.total = Number(data.NEW_FILES) + Number(data.QE) + Number(data.REL_PREP) +Number(data.PUSH_READY) ;
+			$('#total').text(this.total);
 		},
 		error : function(xhr,status,err){
 			alert(status);
@@ -63,10 +76,6 @@ Errata.prototype.summary = function(){
 };
 
 Errata.prototype.search = function(searchStr){
-	
-};
-
-Errata.prototype.my = function(type){
 	
 };
 
