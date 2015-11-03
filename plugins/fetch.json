@@ -38,5 +38,38 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "aerogear-cordova-push": {
+        "source": {
+            "type": "registry",
+            "id": "aerogear-cordova-push"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "es6-promise-plugin": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vstirbu/PromisesPlugin.git",
+            "subdir": "."
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-splashscreen": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-splashscreen"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-sqlite-storage": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-storage"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

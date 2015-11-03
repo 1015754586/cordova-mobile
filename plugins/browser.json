@@ -32,7 +32,20 @@
         },
         "cordova-plugin-transport-security": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "aerogear-cordova-push": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.redhat.errata"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "es6-promise-plugin": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        }
+    }
 }

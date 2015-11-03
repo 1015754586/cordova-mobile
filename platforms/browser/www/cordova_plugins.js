@@ -45,6 +45,44 @@ module.exports = [
         "file": "plugins/org.apache.cordova.network-information/src/browser/NetworkProxy.js",
         "id": "org.apache.cordova.network-information.NetworkProxy",
         "runs": true
+    },
+    {
+        "file": "plugins/aerogear-cordova-push/www/aerogear.ajax.js",
+        "id": "aerogear-cordova-push.AeroGear.ajax",
+        "clobbers": [
+            "ajax"
+        ]
+    },
+    {
+        "file": "plugins/aerogear-cordova-push/www/aerogear-push.js",
+        "id": "aerogear-cordova-push.AeroGear.UnifiedPush",
+        "clobbers": [
+            "push"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/src/browser/SplashScreenProxy.js",
+        "id": "cordova-plugin-splashscreen.SplashScreenProxy",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/es6-promise-plugin/www/promise.js",
+        "id": "es6-promise-plugin.Promise",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -54,7 +92,11 @@ module.exports.metadata =
     "cordova-plugin-device": "1.0.1",
     "org.apache.cordova.network-information": "0.2.15",
     "cordova-plugin-whitelist": "1.0.0",
-    "cordova-plugin-transport-security": "0.1.1"
+    "cordova-plugin-transport-security": "0.1.1",
+    "aerogear-cordova-push": "2.0.3",
+    "cordova-plugin-splashscreen": "2.1.0",
+    "cordova-sqlite-storage": "0.7.11",
+    "es6-promise-plugin": "3.0.2"
 }
 // BOTTOM OF METADATA
 });

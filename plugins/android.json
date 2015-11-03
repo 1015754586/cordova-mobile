@@ -1,0 +1,117 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"PushPlugin\"><param name=\"android-package\" value=\"org.jboss.aerogear.cordova.push.PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.liteglue.SQLitePlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"com.google.android.c2dm.permission.RECEIVE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<permission android:name=\"com.redhat.errata.permission.C2D_MESSAGE\" android:protectionLevel=\"signature\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"com.redhat.errata.permission.C2D_MESSAGE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:name=\"org.jboss.aerogear.cordova.push.PushHandlerActivity\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"org.jboss.aerogear.android.unifiedpush.gcm.AeroGearGCMMessageReceiver\" android:permission=\"com.google.android.c2dm.permission.SEND\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /><category android:name=\"com.redhat.errata\" /></intent-filter><meta-data android:name=\"DEFAULT_MESSAGE_HANDLER_KEY\" android:value=\"org.jboss.aerogear.cordova.push.NotificationMessageHandler\" /></receiver>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-plugin-transport-security": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "aerogear-cordova-push": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        }
+    },
+    "dependent_plugins": {
+        "es6-promise-plugin": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        }
+    }
+}

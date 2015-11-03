@@ -8,15 +8,17 @@
 	<link rel="stylesheet" type="text/css" href="css/project.css">
 </head>
 <body>
-	<div class="header">
+	<div class="header" id="header">
 		Errata Tool
 	</div>
+<!-- home start-->	
+<div id="home_page">
 	<div class="summary-container">
 		<div class="summary-title">
 			Advisories 
 		</div>
 		<div class='summary-data'>
-			456 <span>Open Advisories</span>
+			<font id="total"></font> <span>Open Advisories</span>
 		</div>
 	</div>	
 	<ul class='chart'>
@@ -48,31 +50,145 @@
 			<a href='#'><i class="fa fa-angle-double-right"></i></a>
 		</span>
 	</div>
-	<table class='list' id="adv_list">
+	<table class='list' id="home_adv_list">
 		
 	</table>
+</div>
+<!-- home end-->	
+
+<!-- list start-->
+<div id="list_page">
+	<div class="header">
+		<input placeholder='Type to search' class='input-search'>
+		<i class="fa fa-chevron-left back"></i>
+	</div>
+	<table class='list' id="list_adv_list">
+	</table>	
+</div>
+<!-- list end-->
+
+<!-- chart start-->
+<div id="chart_page">
+	<div id="container" style="min-width: 400px; height: 350px; margin: 0 auto"></div>
+</div>
+<!-- chart end-->
+
+<!-- my end-->
+<div id="my_page">
+		<div class="summary-container mine-bg">
+			<div class="summary-title">
+				Ami Jeain 
+			</div>
+			<div class='summary-data mine-data'>
+				<span>Supervisor, Quality Engineering<br>
+	EMEA.ENG QE Virtualization </span>
+			</div>
+		</div>	
+		<ul class="list-group">
+			<li>
+				<i class="fa fa-flag-checkered"></i>
+				<span>Reporter is me</span>
+				<a href='#'><i class="fa fa-angle-right"></i></a>
+			</li>
+			<li>
+				<i class="fa fa-flask"></i>
+				<span>QE Owner is me</span>
+				<a href='#'><i class="fa fa-angle-right"></i></a>
+			</li>
+			<li>
+				<i class="fa fa-eye"></i>
+				<span>Doc Reviewer is me</span>
+				<a href='#'><i class="fa fa-angle-right"></i></a>
+			</li>
+		</ul>
+
+		<ul class="list-group">
+			<li>
+				<i class="fa fa-pencil-square-o color-approvedbyme"></i>
+				<span>Need My Approval</span>
+				<a href='#'><i class="fa fa-angle-right"></i></a>
+			</li>
+		</ul>
+
+		<ul class="list-group">
+			<li>
+				<i class="fa fa-envelope color-notification"></i>
+				<span>Notification</span>
+				<a href='#'><i class="fa fa-angle-right"></i></a>
+			</li>
+		</ul>
+</div>
+<!-- my end-->
+
+<!-- detail start-->
+<div id="detail_page">
+	<ul class="list">
+		<li>
+			<span class="list-tt">Product</span>
+			<span class="list-content" id="d_Product"></span>
+		</li>
+		<li>
+			<span class="list-tt">Created</span>
+			<span class="list-content" id="d_Created"></span>
+		</li>
+		<li>
+			<span class="list-tt">Status</span>
+			<span class="list-content" id="d_Status"></span>
+		</li>
+		<li>
+			<span class="list-tt">Priority</span>
+			<span class="list-content" id="d_Priority"></span>
+		</li>
+		<li>
+			<span class="list-tt">Sererity</span>
+			<span class="list-content" id="d_Sererity"></span>
+		</li>
+		<li>
+			<span class="list-tt">Type</span>
+			<span class="list-content" id="d_Type"></span>
+		</li>
+		<li>
+			<span class="list-tt">Reporter</span>
+			<span class="list-content"><a href="mailto:junzhang@redhat.com" id="d_Reporter"></a></span>
+		</li>
+		<li>
+			<span class="list-tt">QE Owner</span>
+			<span class="list-content">
+				<a href="mailto:junzhang@redhat.com" id="d_QAowner"></a>
+				<i class="fa fa-refresh pull-right" title='Change QE Owner' id='changeqeowner'></i>
+
+			</span>
+		</li>
+		<div class='changeQEowner'>
+			<input type="text" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" data-items="4" data-provide="typeahead" style="margin: 0 auto;display:none;" class="input-xlarge" id='qeowner'>
+		</div>
+	</ul>
+</div>
+<!-- detail end-->
+
+
 	<div class='footer'>
 		<ul>
-			<li class='active'>
-				<a href="home.html">
+			<li class='active' id="footer_home">
+				<a href="#">
 					<i class="fa fa-home"></i>
 					<div>Home</div>
 				</a>
 			</li>
-			<li>
-				<a href="list.html">
+			<li id="footer_list">
+				<a href="#">
 					<i class="fa fa-list"></i>
 					<div>List</div>
 				</a>
 			</li>
-			<li>
-				<a href="http://www.baidu.com">
+			<li id="footer_chart">
+				<a href="#">
 					<i class="fa fa-bar-chart"></i>
 					<div>Chart</div>
-				</a>
+				</a href="#">
 			</li>
-			<li>
-				<a href="mine.html">
+			<li id="footer_my">
+				<a href="#">
 					<i class="fa fa-user"></i>
 					<div>Mine</div>
 				</a>
@@ -82,6 +198,10 @@
 </body>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/highcharts.js"></script>
+<script type="text/javascript" src="js/ds-client.js"></script>
+<script type="text/javascript" src="js/ds-util.js"></script>
+<script type="text/javascript" src="js/ds-messages.js"></script>
 <script type="text/javascript" src="js/errata.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 </html>
