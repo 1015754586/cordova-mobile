@@ -46,11 +46,11 @@ var app = {
 push.register(app.onNotification, successHandler, errorHandler, pushConfig);
 
 function successHandler() {
-  alert('success')
+  //alert('success')
 }
 
 function errorHandler(message) {
-  alert('error ' + message);
+  //alert('error ' + message);
 }
 },
 onNotification: function(event) {

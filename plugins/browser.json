@@ -18,28 +18,28 @@
         }
     },
     "installed_plugins": {
+        "aerogear-cordova-push": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.example.hello"
+            "PACKAGE_NAME": "com.redhat.errata"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.example.hello"
-        },
-        "org.apache.cordova.network-information": {
-            "PACKAGE_NAME": "com.example.hello"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.example.hello"
-        },
-        "cordova-plugin-transport-security": {
-            "PACKAGE_NAME": "com.example.hello"
-        },
-        "aerogear-cordova-push": {
             "PACKAGE_NAME": "com.redhat.errata"
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.redhat.errata"
         },
+        "cordova-plugin-transport-security": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
         "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.redhat.errata"
+        },
+        "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "com.redhat.errata"
         }
     },

@@ -46,7 +46,7 @@ function Advisory(data){
 		this.listItem = function(id_pre){
 			return $("<tr><td><a href='#' class='advlistitem' name='"+this.id+"' id='"+id_pre+this.id+"'>"+this.fulladvisory+"<br><span>"+this.synopsis+"</span></a></td>"
    		 			+"<td>RHEL</td>"+"<td>RHEL-x.y.z</td>"
-   		 			+"<td><span>"+this.status+"</span></td>"
+   		 			+"<td><span class='qe'>"+this.status+"</span></td>"
     				+"</tr>");
 		};
 		this.detailItem = function(){
@@ -293,7 +293,7 @@ Errata.prototype.initLogin = function(){
 };
 
 Errata.prototype.init = function(type){	
-	
+
 	this.login_page.css('display','none');
 	this.home_page.css('display','none');
 	this.list_page.css('display','none');
@@ -356,5 +356,6 @@ Errata.prototype.init = function(type){
 	});
 	// this.checkLogin();
 // 	var errata = this;
+
 this.home();
 };
