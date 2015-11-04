@@ -6,6 +6,8 @@ var Errata = function(){
 	this.USER_API = this.HOST + "user";
 	this.userName = "";
 	this.total = 0;
+	this.header = $('#header');
+	this.footer = $('#footer');
 	this.home_page = $('#home_page');
 	this.list_page = $('#list_page');
 	this.chart_page = $('#chart_page');
@@ -46,7 +48,7 @@ function Advisory(data){
 		this.listItem = function(id_pre){
 			return $("<tr><td><a href='#' class='advlistitem' name='"+this.id+"' id='"+id_pre+this.id+"'>"+this.fulladvisory+"<br><span>"+this.synopsis+"</span></a></td>"
    		 			+"<td>RHEL</td>"+"<td>RHEL-x.y.z</td>"
-   		 			+"<td><span class='qe'>"+this.status+"</span></td>"
+   		 			+"<td><span class='"+this.status+"'>"+this.status+"</span></td>"
     				+"</tr>");
 		};
 		this.detailItem = function(){
@@ -71,14 +73,45 @@ function User(data){
 
 Errata.prototype.Errata = Errata;
 
+Errata.prototype.init = function(type){	
+
+	this.hideAllPage();
+	
+	var errata = this;
+	$('#footer_home').click(function(){
+		errata.activeFooter($(this));
+		errata.showPage(errata.home_page);
+		errata.home();
+	});
+	$('#footer_list').click(function(){
+		errata.activeFooter($(this));
+		errata.showPage(errata.list_page);
+		errata.list();
+	});
+	$('#footer_chart').click(function(){
+		errata.activeFooter($(this));
+		errata.showPage(errata.chart_page);
+		errata.chart();
+	});
+	$('#footer_my').click(function(){
+		errata.activeFooter($(this));
+		errata.showPage(errata.my_page);
+		errata.my();
+	});
+	// this.checkLogin();
+// 	var errata = this;
+
+this.home();
+};
+
 Errata.prototype.home = function(){
 	if(! this.homeinit){
 		this.home_page.css('display','block');
 		this.summary();
 		this.query($('#home_adv_list'));
 		this.homeinit = true;
-		this.back_page = this.home_page;
 	}
+	this.back_page = this.home_page;
 	
 };
 
@@ -86,8 +119,8 @@ Errata.prototype.list = function(){
 	if(! this.listinit){
 		this.query($('#list_adv_list'));
 		this.listinit = true;
-		this.back_page = this.list_page;
 	}
+	this.back_page = this.list_page;
 };
 
 Errata.prototype.chart = function(type){
@@ -96,15 +129,15 @@ Errata.prototype.chart = function(type){
 	    client.callAPI('http://10.66.141.235:8080/dataservice/api/errata/trend?product=Red Hat Enterprise Linux&status=[NEW_FILES,QE,REL_PREP,PUSH_READY]&date=[interval:monthly]&is_brew=ALL',
 		{"title":"Red Hat Enterprise Linux","subtitle":"Advistories Monthly Report"});
 		this.chartinit = true;
-		this.back_page = this.chart_page;
 	}
+	this.back_page = this.chart_page;
 };
 
 Errata.prototype.my = function(type){
 	if(! this.myinit){
 		this.myinit = true;
-		this.back_page = this.my_page;
 	}
+	this.back_page = this.my_page;
 };
 
 Errata.prototype.summary = function(){
@@ -178,11 +211,7 @@ Errata.prototype.login = function(name){
 };
 
 Errata.prototype.detail = function(id){
-	this.home_page.css('display','none');
-	this.chart_page.css('display','none');
-	this.my_page.css('display','none');
-	this.list_page.css('display','none');
-	this.detail_page.css('display','block');
+	this.showPage(this.detail_page);
 	var errata = this;
 	$.ajax({
 		url : this.DETAIL_API,
@@ -190,7 +219,7 @@ Errata.prototype.detail = function(id){
 		dataType : "jsonp",
 		success : function(data){
 			(new Advisory(data)).detailItem();
-			$('.footer').fadeOut(200);
+			errata.hideFooter();
 			$('#back_icon').click(function(){
 				errata.turnBack();
 			});
@@ -204,7 +233,7 @@ Errata.prototype.detail = function(id){
 Errata.prototype.turnBack = function(){
 	this.detail_page.css('display','none');
 	this.back_page.css('display','block');
-	$('.footer').fadeIn(200);
+	this.showFooter();
 };
 
 Errata.prototype.changeQA = function(name){
@@ -292,70 +321,32 @@ Errata.prototype.initLogin = function(){
 	
 };
 
-Errata.prototype.init = function(type){	
+Errata.prototype.showPage = function(errata_page){
+	this.hideAllPage();
+	errata_page.show();
+};
 
-	this.login_page.css('display','none');
-	this.home_page.css('display','none');
-	this.list_page.css('display','none');
-	this.chart_page.css('display','none');
-	this.my_page.css('display','none');
-	this.detail_page.css('display','none');
-	
-	var errata = this;
-	$('#footer_home').click(function(){
-		$(this).removeClass('active').addClass('active');
-		$('#footer_list').removeClass('active');
-		$('#footer_chart').removeClass('active');
-		$('#footer_my').removeClass('active');
-		errata.chart_page.css('display','none');
-		errata.my_page.css('display','none');
-		errata.list_page.css('display','none');
-		errata.detail_page.css('display','none');
-		errata.home_page.css('display','block');
-		
-		errata.home();
-	});
-	$('#footer_list').click(function(){
-		$(this).addClass('active');
-		$('#footer_home').removeClass('active');
-		$('#footer_chart').removeClass('active');
-		$('#footer_my').removeClass('active');
-		errata.home_page.css('display','none');
-		errata.chart_page.css('display','none');
-		errata.my_page.css('display','none');
-		errata.detail_page.css('display','none');
-		errata.list_page.css('display','block');
-		
-		errata.list();
-	});
-	$('#footer_chart').click(function(){
-		$(this).removeClass('active').addClass('active');
-		$('#footer_list').removeClass('active');
-		$('#footer_my').removeClass('active');
-		$('#footer_home').removeClass('active');
-		errata.home_page.css('display','none');
-		errata.chart_page.css('display','block');
-		errata.my_page.css('display','none');
-		errata.detail_page.css('display','none');
-		errata.list_page.css('display','none');
-		
-		errata.chart();
-	});
-	$('#footer_my').click(function(){
-		$(this).removeClass('active').addClass('active');
-		$('#footer_list').removeClass('active');
-		$('#footer_chart').removeClass('active');
-		$('#footer_home').removeClass('active');
-		errata.home_page.css('display','none');
-		errata.chart_page.css('display','none');
-		errata.my_page.css('display','block');
-		errata.list_page.css('display','none');
-		errata.detail_page.css('display','none');
-		
-		errata.my();
-	});
-	// this.checkLogin();
-// 	var errata = this;
+Errata.prototype.hideAllPage = function(){
+	this.login_page.hide();
+	this.home_page.hide();
+	this.list_page.hide();
+	this.chart_page.hide();
+	this.my_page.hide();
+	this.detail_page.hide();
+};
 
-this.home();
+Errata.prototype.hideFooter = function(){
+	this.footer.fadeOut(100);
+};
+
+Errata.prototype.showFooter = function(){
+	this.footer.fadeIn(100);
+};
+
+Errata.prototype.activeFooter = function(footer){
+	$('#footer_home').removeClass('active');
+	$('#footer_list').removeClass('active');
+	$('#footer_chart').removeClass('active');
+	$('#footer_my').removeClass('active');
+	footer.addClass('active');
 };

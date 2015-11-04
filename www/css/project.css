@@ -202,26 +202,26 @@ ul.chart li.colors{
 ul.chart li.newfiles{
   background: #00b9e4;
 }
-.newfiles{
+.NEW_FILES{
   background: #00b9e4;
 }
 
 ul.chart li.qe{
   background: #92d400;
 }
-.qe{
+.QE{
   background: #92d400;
 }
 ul.chart li.relprep{
   background: #007a87;
 }
-.relprep{
+.REL_PREP{
   background: #007a87;
 }
 ul.chart li.pushready{
   background: #f0ab00;
 }     
-.pushready{
+.PUSH_READY{
   background: #f0ab00;
 }
 
