@@ -57,15 +57,6 @@ html,body{
   font-size: 11px;
   color: #EB7581;
 }
-.start-image{
-  background: url('https://s3.amazonaws.com/media-p.slid.es/uploads/team-32/images/1574736/corporate-1.svg');
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 80%;
-  height: 200px;
-  background-size: cover;
-}
 .content-login{
   width: 70%;
   margin: 0 auto;
@@ -145,7 +136,8 @@ a:hover{
   left: 0;
 }
 .header + div,
-.header + table{
+.header + table,
+.header + ul{
   margin-top: 64px;
 }
 .summary-container{
@@ -327,7 +319,11 @@ table.list td:nth-child(4) span{
 /* detail.html css */
 .content-list{
   padding: 10px 0 40px;
-  background: white;
+  background: #ffffff;
+}
+.title{
+  font-size: 19px;
+  padding-top: 4px;
 }
 .pull-left{
   float: left;;
