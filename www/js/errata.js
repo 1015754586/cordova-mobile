@@ -4,7 +4,6 @@ var Errata = function(){
 	this.QUERY_API = this.HOST + "list";
 	this.DETAIL_API = this.HOST + "getadv";
 	this.USER_API = this.HOST + "user";
-	this.userName = "";
 	this.total = 0;
 	this.header = $('#header');
 	this.footer = $('#footer');
@@ -29,7 +28,6 @@ var Errata = function(){
 };
 
 function Advisory(data){
-		
 		this.id = data.id;
 		this.fulladvisory = data.fulladvisory;
 		this.synopsis = data.synopsis;
@@ -78,41 +76,41 @@ Errata.prototype.init = function(type){
 	this.hideAllPage();
 	
 	var errata = this;
-	$('#footer_home').click(function(){
+	
+	$('#footer_home').bind("tap",function(){
 		errata.activeFooter($(this));
 		errata.showPage(errata.home_page);
 		errata.home();
 	});
-	$('#footer_list').click(function(){
+	$('#footer_list').bind("tap",function(){
 		errata.activeFooter($(this));
 		errata.showPage(errata.list_page);
 		errata.list();
 	});
-	$('#footer_chart').click(function(){
+	$('#footer_chart').bind("tap",function(){
 		errata.activeFooter($(this));
 		errata.showPage(errata.chart_page);
 		errata.chart();
 	});
-	$('#footer_my').click(function(){
+	$('#footer_my').bind("tap",function(){
 		errata.activeFooter($(this));
 		errata.showPage(errata.my_page);
 		errata.my();
 	});
 	// this.checkLogin();
 // 	var errata = this;
-
-this.home();
+	this.home();
+	navigator.splashscreen.hide();
 };
 
 Errata.prototype.home = function(){
 	if(! this.homeinit){
-		this.home_page.css('display','block');
+		this.home_page.show();
 		this.summary();
 		this.query($('#home_adv_list'));
 		this.homeinit = true;
 	}
 	this.back_page = this.home_page;
-	
 };
 
 Errata.prototype.list = function(){
@@ -174,7 +172,7 @@ Errata.prototype.query = function(container,status,page){
 				var id_pre = container.attr('id');
 				var adv = (new Advisory(advisory)).listItem(id_pre);
 			    container.append(adv);
-				$('#'+id_pre+advisory.id).bind("click",function(){
+				$('#'+id_pre+advisory.id).bind("tap",function(){
 					errata.detail($(this).attr("name"));
 				});
 			}
