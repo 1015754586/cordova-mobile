@@ -58,7 +58,7 @@ function Advisory(data){
 			$('#d_Type').text(this.errata_type);
 			$('#d_Reporter').text(this.reporter);
 			$('#d_QAowner').text(this.assigner);
-			$('#header').html(this.fulladvisory+'<i class="fa fa-chevron-left back" id="back_icon"></i>');
+			$('#header').html('<div class="title">'+this.fulladvisory+'</div>');
 		}
 };
 
