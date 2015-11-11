@@ -22,13 +22,13 @@
 				<li>
 					<i class="fa fa-user"></i>
 					<span>
-						<input placeholder='Kerberos Name...' id="loginID"> 
+						<input placeholder='Kerberos Name...' id="loginID"/> 
 					</span>
 				</li>
 				<li>
 					<i class="fa fa-lock"></i>
 					<span>
-						<input placeholder='Password...'>
+						<input placeholder='Password...' type="password"/>
 					</span>
 				</li>
 			</ul>
@@ -114,13 +114,12 @@
 	<div class="header">
 		Errata Tool
 	</div>
-		<div class="summary-container mine-bg" id="mytest">
-			<div class="summary-title">
-				Ami Jeain 
+		<div class="summary-container mine-bg">
+			<div class="summary-title" id="u_login_name">
+				
 			</div>
 			<div class='summary-data mine-data'>
-				<span>Supervisor, Quality Engineering<br>
-	EMEA.ENG QE Virtualization </span>
+				<span id="u_real_name"></span>
 			</div>
 		</div>
 		<ul class="list-group">
@@ -250,6 +249,8 @@
 			</li>
 		</ul>
 	</div>
+	
+	<div class="container-loading" id="loading" style="display:none"><div class="loading"></div></div>
 </body>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
