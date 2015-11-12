@@ -134,6 +134,7 @@ a:hover{
   width: 100%;
   top: 0;
   left: 0;
+  opacity : 0.95;
 }
 .header + div,
 .header + table,
@@ -265,6 +266,7 @@ table.list td:nth-child(4) span{
   background: #f7f7f7;
   height: 49px;
   width: 100%;
+  opacity : 0.95;
 }
 .footer ul{
   margin: 8px auto;

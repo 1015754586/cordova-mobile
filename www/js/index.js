@@ -36,6 +36,7 @@ function successHandler() {
 function errorHandler(message) {
   //alert('error ' + message);
 }
+
 },
 onNotification: function(event) {
   alert(event.alert);

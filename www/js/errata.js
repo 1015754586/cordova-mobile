@@ -4,6 +4,7 @@ var Errata = function(){
 	this.QUERY_API = this.HOST + "list";
 	this.DETAIL_API = this.HOST + "getadv";
 	this.USER_API = this.HOST + "user";
+	this.MY_API = this.HOST + "my";
 	this.total = 0;
 	this.header = $('#header');
 	this.footer = $('#footer');
@@ -13,6 +14,7 @@ var Errata = function(){
 	this.my_page = $('#my_page');
 	this.detail_page = $('#detail_page');
 	this.login_page = $('#login_page');
+	this.my_list_page = $('#my_list_page');
 	this.back_page;
 	this.loading = $("#loading");
 	this.loginname = $("#u_login_name");
@@ -76,13 +78,15 @@ Errata.prototype.Errata = Errata;
 
 Errata.prototype.init = function(type){	
 	this.initDB();
+	this.hideAllPage();
 	$.mobile.loading( "show", {text: '',textVisible: '',theme: '',textonly: '',html: ''});
 	$('#changeqeowner').toggle(function() {$('#qeowner').fadeIn();},function(){$('#qeowner').fadeOut();});
 
 	// this.removeUser();
-	this.hideAllPage();
+	
 	var errata = this;
 		
+	/* init tab */	
 	$('#footer_home').bind("click",function(){
 		errata.tabNavigate($(this),errata.home_page);
 		errata.home();
@@ -99,8 +103,12 @@ Errata.prototype.init = function(type){
 		errata.tabNavigate($(this),errata.my_page);
 		errata.my();
 	});
+	
+	$('.queryme').bind("click",function(){
+		errata.queryme($(this).attr('id'));
+	});
+	
 	this.checkLogin();
-	// this.home();
 	navigator.splashscreen.hide();
 };
 
@@ -254,6 +262,10 @@ Errata.prototype.turnBack = function(){
 	this.showFooter();
 };
 
+Errata.prototype.queryme = function(type){
+	alert(type);
+};
+
 Errata.prototype.changeQA = function(name){
 	
 };
@@ -266,9 +278,9 @@ Errata.prototype.comment = function(id,content){
 	
 };
 
-// /**
-// * SQLite operation
-// */
+/**
+* SQLite operation
+*/
 Errata.prototype.saveUser = function(user){
 	var db = this.db();
 	var errata = this;
@@ -282,14 +294,9 @@ Errata.prototype.saveUser = function(user){
 
 Errata.prototype.removeUser = function(user){
 	var db = this.db();
-
 	var errata = this;
 	db.transaction(function(tx) {
-      // tx.executeSql("delete from t_user where userId = ? ", [user.id],
-// 		function(tx, res) {
-//
-//       });
-	tx.executeSql("delete from t_user");
+		tx.executeSql("delete from t_user");
 	});
 };
 
@@ -371,6 +378,7 @@ Errata.prototype.hideAllPage = function(){
 	this.chart_page.hide();
 	this.my_page.hide();
 	this.detail_page.hide();
+	this.my_list_page.hide();
 };
 
 Errata.prototype.hideFooter = function(){
@@ -406,3 +414,12 @@ Errata.prototype.pushRegister = function(){
 	};
 	push.register(app.onNotification, successHandler, errorHandler, pushConfig);
 };
+
+Errata.prototype.alert = function(message,title,buttonName){
+	navigator.notification.alert(
+	    message,  // message
+	    function(){},           // callback
+	    title,                 // title
+	    buttonName                  // buttonName
+	);
+}
