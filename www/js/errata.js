@@ -4,6 +4,7 @@ var Errata = function(){
 	this.QUERY_API = this.HOST + "list";
 	this.DETAIL_API = this.HOST + "getadv";
 	this.USER_API = this.HOST + "user";
+	this.CHANGE_API = this.HOST + "change";
 	this.total = 0;
 	this.header = $('#header');
 	this.footer = $('#footer');
@@ -79,13 +80,16 @@ Errata.prototype.init = function(type){
 	this.initDB();
 	this.hideAllPage();
 	this.back_page.push(this.home_page);
-	$.mobile.loading( "show", {text: '',textVisible: '',theme: '',textonly: '',html: ''});
-	$('#changeqeowner').toggle(function() {$('#qeowner').fadeIn();},function(){$('#qeowner').fadeOut();});
-
 	// this.removeUser();
 	
 	var errata = this;
 		
+	$.mobile.loading( "show", {text: '',textVisible: '',theme: '',textonly: '',html: ''});
+	$('#changeqeowner').toggle(function() {$('#qeowner').fadeIn();},function(){$('#qeowner').fadeOut();});
+	$('.queryme').bind("click",function(){
+		errata.queryme($(this).attr('id'));
+	});
+	
 	/* init tab */	
 	$('#footer_home').bind("click",function(){
 		errata.tabNavigate($(this),errata.home_page);
@@ -107,16 +111,20 @@ Errata.prototype.init = function(type){
 	$('.queryme').bind("click",function(){
 		errata.queryme($(this).attr('id'));
 	});
+	$('#changeowner').unbind('click').click(function(){
+		errata.changeQA($('#qeowner').val());
+	});
 	
 	this.checkLogin();
 	navigator.splashscreen.hide();
+
 };
 
 Errata.prototype.initLogin = function(){
 	var errata = this;
 	if(this.loginState){
-		this.getUser();
 		this.home();
+		//this.pushRegister(this.user.loginname);
 	}else{
 		this.footer.hide();
 		this.login_page.show();
@@ -139,8 +147,9 @@ Errata.prototype.login = function(name){
 				errata.login_page.hide();
 				errata.footer.show();
 				errata.home();
+				errata.pushRegister(user.loginname);
 			}else{
-				errata.alert('username or password error','Errata Alert','ok');
+				errata.alert('username or password are not correct','Login Error','done');
 			}
 			
 		},
@@ -190,28 +199,16 @@ Errata.prototype.summary = function(){
 		dataType : "jsonp",
 		success : function(data){
 			$('#NEW_FILES').text(data.NEW_FILES).click(function(){
-				var status = $(this).attr('id');
-				errata.tabNavigate($('#footer_list'),errata.list_page);
-				$('#list_adv_list').html('');
-				errata.listquery({status : status});
+				summarylist($(this).attr('id'));
 			});
 			$('#QE').text(data.QE).click(function(){
-				var status = $(this).attr('id');
-				errata.tabNavigate($('#footer_list'),errata.list_page);
-				$('#list_adv_list').html('');
-				errata.listquery({status : status});
+				summarylist($(this).attr('id'));
 			});
 			$('#REL_PREP').text(data.REL_PREP).click(function(){
-				var status = $(this).attr('id');
-				errata.tabNavigate($('#footer_list'),errata.list_page);
-				$('#list_adv_list').html('');
-				errata.listquery({status : status});
+				summarylist($(this).attr('id'));
 			});
 			$('#PUSH_READY').text(data.PUSH_READY).click(function(){
-				var status = $(this).attr('id');
-				errata.tabNavigate($('#footer_list'),errata.list_page);
-				$('#list_adv_list').html('');
-				errata.listquery({status : status});
+				summarylist($(this).attr('id'));
 			});
 			this.total = Number(data.NEW_FILES) + Number(data.QE) + Number(data.REL_PREP) +Number(data.PUSH_READY) ;
 			$('#total').text(this.total);
@@ -220,6 +217,12 @@ Errata.prototype.summary = function(){
 			alert(status);
 		}
 	});
+	
+	function summarylist(status){
+		errata.tabNavigate($('#footer_list'),errata.list_page);
+		$('#list_adv_list').html('');
+		errata.listquery({status : status});
+	}
 };
 
 Errata.prototype.homequery = function(data){
@@ -269,7 +272,7 @@ Errata.prototype.tableView = function(container,list){
 		var id_pre = container.attr('id');
 		var adv = (new Advisory(advisory)).listItem(id_pre);
 	    container.append(adv);
-		$('#'+id_pre+advisory.id).bind("click",function(){
+		$('#'+id_pre+advisory.id).unbind('click').bind("click",function(){
 			errata.detail($(this).attr("name"));
 		});
 	}
@@ -295,6 +298,9 @@ Errata.prototype.detail = function(id){
 		success : function(data){
 			(new Advisory(data)).detailItem();
 			errata.loading.hide();
+			$('#changeowner').unbind('click').click(function(){
+				errata.changeQA($('#qeowner').val(),data.id);
+			});
 		},
 		error : function(xhr,status,err){
 			alert(status);
@@ -322,8 +328,19 @@ Errata.prototype.queryme = function(type){
 	this.myquery(data);
 };
 
-Errata.prototype.changeQA = function(name){
-	
+Errata.prototype.changeQA = function(assign,id){
+	alert(assign+','+id);
+	var errata = this;
+	var data = { assign : assign , from : this.userloginname , id : id  };
+	$.ajax({
+		url:this.CHANGE_API,
+		data : data,
+		dataType : 'jsonp',
+		type : 'post',
+		success : function(){
+			errata.alert('success! the new QA owner will receive a notification on her/his mobile.','Change QAowner','done');
+		}
+	});
 };
 
 Errata.prototype.pushNotification = function(){
@@ -380,10 +397,17 @@ Errata.prototype.checkLogin = function(){
 	var db = this.db();
 	var errata = this;
 	db.transaction(function(tx) {
-      tx.executeSql("select count(id) as cnt from t_user;", [], function(tx, res) {
-		  if(res.rows.item(0).cnt == 1){
-			  errata.loginState = true;
-			  errata.initLogin();
+      tx.executeSql("select userId as id,loginname,realname,role from t_user;", [], function(tx, res) {
+		  var count = res.rows.length;
+		  if(count == 1){
+			 var data = {};
+			 data.id = res.rows.item(0).id;
+			 data.loginname = res.rows.item(0).loginname;
+			 data.realname = res.rows.item(0).realname;
+			 data.role = res.rows.item(0).role;
+			 errata.user = new User(data);
+			 errata.loginState = true;
+			 errata.initLogin();
 		  }else{
 		  	errata.loginState = false;
 			errata.initLogin();
@@ -485,8 +509,19 @@ Errata.prototype.turnBack = function(page){
 	this.showFooter();
 };
 
-Errata.prototype.pushRegister = function(){
-	var username = this.user.username;
+Errata.prototype.onNotification = function(event){
+	console.log('------------- onNotification.');
+	cordova.plugins.notification.badge.increase(1);
+	navigator.notification.alert(
+	    event.alert,
+	    function(){},
+	    'receive notification',
+	    'done'
+	);
+}
+
+Errata.prototype.pushRegister = function(username){
+	var errata = this;
 	var pushConfig = {
 	      pushServerURL: "https://aerogear-pntdev.rhcloud.com/ag-push/",
 		  alias : username,
@@ -495,14 +530,19 @@ Errata.prototype.pushRegister = function(){
 	        variantSecret: "27ecc4a7-b262-44e0-9943-ab032479e59d"
 	      }
 	};
-	push.register(app.onNotification, successHandler, errorHandler, pushConfig);
+	
+	function successHandler() {};
+	function errorHandler(message) {};
+	
+	push.register(errata.onNotification, successHandler, errorHandler, pushConfig);
+	
 };
 
 Errata.prototype.alert = function(message,title,buttonName){
 	navigator.notification.alert(
-	    message,  // message
-	    function(){},           // callback
-	    title,                 // title
-	    buttonName                  // buttonName
+	    message,  
+	    function(){},          
+	    title,
+	    buttonName
 	);
 }
