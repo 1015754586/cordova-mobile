@@ -139,7 +139,7 @@ a:hover{
 .header + div,
 .header + table,
 .header + ul{
-  margin-top: 64px;
+  margin-top: 64px !important;
 }
 .summary-container{
   height: 60px;
@@ -445,7 +445,9 @@ ul.comments li.comments-tt{
   line-height: 15px; 
   margin-top: -10px;
 }
-ul.list-group{
+ul.list-group,
+div.list-group,
+.profile-group{
   margin: 15px 0 0 0;
   border-top: solid 1px #ccc;
   background: white;
@@ -490,6 +492,74 @@ ul.list-group li a i{
 ul.list-group li a:link i, ul.list-group li a:visited i{
   color: gray;
 }
+div.list-group {
+  position: relative;
+}
+div.list-group div{
+  display: inline-block;
+}
+.avatar{
+  margin: 10px;
+}
+img.ava{
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.avatar-name{
+  margin-bottom: 10px;
+}
+.avatar-name .username{
+  font-size: 16px;
+  display: block;
+}
+.avatar-name .title{
+  font-size: 12px;
+  display: block;
+}
+div.list-group .fa-angle-right,
+.profile-group .fa-angle-right{
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  display: inline-block;
+}
+
+.profile-group div{
+  display: inline-block;
+  padding-top: 10px;
+}
+.profile-name{
+  width: 59%;
+  padding: 10px;
+
+}
+.profile-vaule{
+  width: 40%;
+  text-align: right;
+  position: relative;
+  padding-right: 50px;
+}
+
+.buttons{
+  margin: 100px 0;
+  text-align: center;
+}
+.buttons button{
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 3px;
+  background: #e0293b;
+  border: none;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  width: 80%;
+}
+
+
 .gray{
   background: #efeff4;
 }
