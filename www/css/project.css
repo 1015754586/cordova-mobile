@@ -586,4 +586,7 @@ div.list-group .fa-angle-right,
     top: 0;
     width: 100%;
   }
- 
+.footer img{
+  width:24px;
+  height: 24px;
+}
