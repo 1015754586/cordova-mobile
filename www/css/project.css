@@ -281,10 +281,6 @@ table.list td:nth-child(4) span{
 .footer ul li{
   color: #595c60;
 }
-.footer ul li:hover{
-  color: #1e1e1e;
-  cursor: pointer;
-}
 .footer ul li{
   font-size: 12px;
 }
@@ -311,10 +307,6 @@ table.list td:nth-child(4) span{
 .footer ul li div{
   font-size: 10px;
 }
-.footer ul li.active{
-  color: #e0293b;
-}
-
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 768px){
   table.list td:nth-child(2),
